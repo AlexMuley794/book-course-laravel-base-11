@@ -26,6 +26,7 @@
                     <th>Título</th>
                     <th>Publicado</th>
                     <th>Categoría</th>
+                    <th>Imagen</th> <!-- Nueva columna para la imagen -->
                     <th>Opciones</th>
                 </tr>
             </thead>
@@ -35,15 +36,22 @@
                         <td>{{ $post->id }}</td>
                         <td>{{ $post->title }}</td>
                         <td>
-                            @if($post->posted)
+                            @if($post->posted == 'yes')
                                 <span class="badge bg-success">Sí</span>
                             @else
                                 <span class="badge bg-danger">No</span>
                             @endif
                         </td>
                         <td>
-                            <!-- Verificación de categoría con un operador de encadenamiento seguro -->
                             {{ optional($post->category)->title ?? 'Sin categoría' }}
+                        </td>
+                        <td>
+                            <!-- Mostrar la imagen si existe -->
+                            @if($post->image)
+                                <img src="{{ asset('images/'.$post->image) }}" alt="Imagen del post" width="100">
+                            @else
+                                <span>No disponible</span>
+                            @endif
                         </td>
                         <td>
                             <a href="{{ route('post.show', $post->id) }}" class="btn btn-secondary btn-sm">Mostrar</a>
@@ -57,14 +65,13 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">No hay posts disponibles</td>
+                        <td colspan="6" class="text-center">No hay posts disponibles</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
-    {{-- Paginación Bootstrap --}}
     <div class="d-flex justify-content-center mt-4">
         {{ $posts->links('pagination::bootstrap-5') }}
     </div>

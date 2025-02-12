@@ -12,30 +12,27 @@
                 <div class="card-body">
                     <form action="{{ route('profile.update') }}" method="POST">
                         @csrf
-                        @method('PATCH') <!-- Asegúrate de usar PATCH para la actualización -->
+                        @method('PUT') 
 
-                        <!-- Campo para el nombre -->
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $user->name) }}">
                         </div>
 
-                        <!-- Campo para el email -->
                         <div class="mb-3">
-                            <label for="email" class="form-label">Correo electrónico</label>
+                            <label for="email" class="form-label">Correo Electrónico</label>
                             <input type="email" name="email" class="form-control" id="email" value="{{ old('email', $user->email) }}">
                         </div>
 
-                        <!-- Campo para la contraseña -->
+                        <!-- Cambiar Contraseña del Usuario -->
                         <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña (opcional)</label>
-                            <input type="password" name="password" class="form-control" id="password">
+                            <label for="password" class="form-label">Nueva Contraseña (opcional)</label>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Nueva contraseña">
                         </div>
 
-                        <!-- Campo para confirmar la contraseña -->
                         <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
-                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
+                            <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirmar nueva contraseña">
                         </div>
 
                         <div class="text-center">
@@ -45,16 +42,6 @@
                     </form>
                 </div>
             </div>
-
-            <!-- Formulario para eliminar el perfil -->
-            <form action="{{ route('profile.destroy') }}" method="POST" class="mt-4">
-                @csrf
-                @method('DELETE') <!-- Usamos DELETE para eliminar -->
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-danger px-4">Eliminar perfil</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
